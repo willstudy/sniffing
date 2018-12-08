@@ -5,6 +5,19 @@
         加载中...
     </loading>
 
+   <swiper class="swiper" autoplay="true" interval="2000" indicator-dots='true' >
+    <swiper-item>
+      <image src="./images/cat.jpg" ></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="./images/hand.jpg" ></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="./images/wish.jpg" ></image>
+    </swiper-item>
+ 
+  </swiper>
+
     <view class="card" wx:for="{{items}}">
         <view data-publish-time="{{item.time}}" bindtap="onItemClick">
             <image class="image" mode="aspectFill" src="{{item.src}}"/>
@@ -12,6 +25,8 @@
             <view class="title">{{item.title}}</view>
         </view>
     </view>
+
+ 
 
     <icon type="success" size="50" class="post" bindtap="onPostClick"/>
 </view>
