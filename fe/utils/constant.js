@@ -1,7 +1,6 @@
 //url相关
-var BASE_URL = "https://api.lecury.cn/index";
-//var GET_URL = BASE_URL.concat("/history/content/100/1");
-var GET_URL = BASE_URL;
+var API_ADDRESS = "https://api.lecury.cn";
+var INDEX_URL = API_ADDRESS.concat("/index");
 
 //error相关
 var ERROR_DATA_IS_NULL = "获取数据为空，请重试";
@@ -12,8 +11,7 @@ var PAGE_SPECIFIC = "/pages/specific/specific";
 var PAGE_POST = "/pages/post/post";
 
 module.exports = {
-    BASE_URL: BASE_URL,
-    GET_URL: GET_URL,
+    INDEX_URL: INDEX_URL,
     ERROR_DATA_IS_NULL: ERROR_DATA_IS_NULL,
     PAGE_MAIN: PAGE_MAIN,
     PAGE_SPECIFIC: PAGE_SPECIFIC,

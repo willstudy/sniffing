@@ -1,31 +1,36 @@
 package models
 
-type Thing struct {
-	Id          uint64   `json:_id`
-	CreateTime  string   `json:createdAt`
-	Desc        string   `json:desc`
-	Images      []string `json:images`
-	PublishTime string   `json:publishedAt`
-	Source      string   `json:source`
-	Type        string   `json:type`
-	Url         string   `json:url`
-	Used        bool     `json:used`
-	Who         string   `json:who`
+// 主页头部包含的Url信息
+type BannerInfo struct {
+	Img string `json:"img"`
+	Target string `json:"target"`
 }
-
-type CatagoryThing struct {
-	Android []Thing `json:"android,omitempty"`
-	App     []Thing `json:"app,omitempty"`
-	IOS     []Thing `json:"ios,omitempty"`
-	Video   []Thing `json:"休闲视频,omitempty"`
-	FE      []Thing `json:"前端,omitempty"`
-	Extend  []Thing `json:"拓展资源,omitempty"`
-	Welfare []Thing `json:"福利,omitempty"`
+type HotInfo struct {
+	Avatar string `json:"avatar"`
+	Title string `json:"tilte"`
+	CreatedAt string `json:"createdAt"`
+	Brief string `json:"brief"`
+	Image string `json:"image"`
+	Author string `json:"author"`
+	PublishAt string `json:"publishedAt"`
+	Source string `json:"source"`
+	Type string `json:"type"`
+	TargetUrl string `json:"target_url"`
+	Comments uint32 `json:"comments"`
+	Stars  uint32 `json:"stars"`
 }
-
-type TodayThing struct {
+// 主页主体内容部分
+type ContentInfo struct {
+	Hot []HotInfo `json:"hot"`
+}
+// 主页所需的数据
+type IndexData struct {
+	Banner  []BannerInfo  `json:"banner"`
+	Content ContentInfo `json:"content"`
+}
+// 主页返回信息
+type IndexInfo struct {
 	Code     int32         `json:"code"`
 	Msg      string        `json:"msg"`
-	Catagory []string      `json:"category"`
-	Results  CatagoryThing `json:"results"`
+	Data     IndexData     `json:"data"`
 }

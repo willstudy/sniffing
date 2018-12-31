@@ -15,22 +15,4 @@ import (
 
 func init() {
 	beego.Router("/index", &controllers.IndexController{})
-	ns := beego.NewNamespace("/v1",
-		beego.NSNamespace("/index",
-			beego.NSInclude(
-				&controllers.IndexController{},
-			),
-		),
-		beego.NSNamespace("/object",
-			beego.NSInclude(
-				&controllers.ObjectController{},
-			),
-		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
 }

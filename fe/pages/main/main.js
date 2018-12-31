@@ -1,23 +1,28 @@
 Page({
+    // 首页数据结构
     data: {
-        items: [],
+        // 滚动图片
+        banner: [],
+        channel: [],
+        content: [],
         hidden: false
     },
+    // 刚启动时加载
     onLoad: function (options) {
         var that = this;
-        requestData(that, mCurrentPage + 1);
+        // 获取主页所需要的数据
+        getIndexData(that);
     },
-
+    // 点击每个HotMsg时触发
     onItemClick: function (event) {
         var targetUrl = Constant.PAGE_SPECIFIC;
         if (event.currentTarget.dataset.publishTime != null)
             targetUrl = targetUrl + "?publishTime=" + event.currentTarget.dataset.publishTime;
-
         wx.navigateTo({
             url: targetUrl
         });
     },
-
+    // 点击提交数据时，触发
     onPostClick: function (event) {
         console.log("onPostClick");
         wx.navigateTo({
@@ -26,73 +31,53 @@ Page({
     }
 });
 
-var mTitles = [];
-var mSrcs = [];
-var mTimes = [];
-var mCurrentPage = -1;
-
 /**
- * 请求数据
+ * 获取主页所需要的数据
  * @param that Page的对象，用其进行数据的更新
- * @param targetPage 请求的目标页码
  */
-function requestData(that, targetPage) {
+function getIndexData(that) {
     wx.request({
-        //url: Constant.GET_URL.replace("(/\(\d+))$", targetPage),
-        url: Constant.GET_URL,
+        url: Constant.INDEX_URL,
         header: {
             "Content-Type": "application/json"
         },
         success: function (res) {
             if (res == null || res.data.code != 0) {
-                console.log("request error!!");
-                console.error(Constant.ERROR_DATA_IS_NULL);
+                console.error("get index data failed");
+                wx.showModal({
+                    title: 'Warning',
+                    content: '加载失败，请重试~',
+                    success: function (r) {
+                        console.log("try again");
+                    }
+                });
                 return;
             }
-            var results = res.data.results;
-            var andorid = results["android"];
-            for (var i = 0; i < andorid.length; i++) {
-                console.log(andorid[i])
-                bindData(andorid[i]);
-            }
-
-            //将获得的各种数据写入itemList，用于setData
-            var itemList = [];
-            for (var i = 0; i < mTitles.length; i++)
-                itemList.push({title: mTitles[i], src: mSrcs[i], time: mTimes[i]});
-
+            console.log(res.data.data);
             that.setData({
-                items: itemList,
+                banner: res.data.data.banner,
+                channel: [
+                    {
+                        "target": "/pages/main/main",
+                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
+                        "name": "andriod",
+                    },
+                    {
+                        "target": "/pages/main/main",
+                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
+                        "name": "andriod",
+                    },
+                    {
+                        "target": "/pages/main/main",
+                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
+                        "name": "andriod",
+                    },
+                ],
+                content: res.data.data.content,
                 hidden: true
             });
-
-            mCurrentPage = targetPage;
         }
     });
-}
-
-/**
- * 绑定数据
- * @param itemData Gank的接口返回的content值，里面有各种相关的信息
- */
-function bindData(itemData) {
-    /*
-    var re = new RegExp("[a-zA-z]+://[^\"]*");
-    //图片URL标志之前的是"img alt"
-    var title = itemData.content.split("img alt=")[1].match(re)[0];
-
-    //todo 挺奇怪的，小程序不能显示以 （ww+数字） 开头的图片，把它改成 ws 开头就可以了，不知道为什么
-    if( -1 != (title.search("//ww"))){
-        var src = title.replace("//ww", "//ws");
-    }
-    //早期的URL不一定是ww开头的，不需要转换直接调用
-    else{
-        var src = title;
-    }
-    */
-    mTitles.push(itemData.Desc);
-    mTimes.push(itemData.PublishTime);
-    mSrcs.push(itemData.Images[0]);
 }
 
 var Constant = require('../../utils/constant.js');

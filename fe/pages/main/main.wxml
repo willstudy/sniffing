@@ -1,32 +1,53 @@
-<!--main.wxml-->
-<view>
-
+<view class="container">
     <loading hidden="{{hidden}}">
         加载中...
     </loading>
+    <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+        <swiper-item wx:for="{{banner}}">
+            <navigator url="{{item.target}}">
+                <image src="../../images/index/1.jpg" background-size="cover"></image>
+            </navigator>
+        </swiper-item>
+    </swiper>
 
-   <swiper class="swiper" autoplay="true" interval="2000" indicator-dots='true' >
-    <swiper-item>
-      <image src="./images/cat.jpg" ></image>
-    </swiper-item>
-    <swiper-item>
-      <image src="./images/hand.jpg" ></image>
-    </swiper-item>
-    <swiper-item>
-      <image src="./images/wish.jpg" ></image>
-    </swiper-item>
- 
-  </swiper>
+    <view class="m-menu">
+        <navigator class="item" url="{{item.target}}" wx:for="{{channel}}">
+            <image src="{{item.icon_url}}" background-size="cover"></image>
+            <text>{{item.name}}</text>
+        </navigator>
+    </view>
 
-    <view class="card" wx:for="{{items}}">
-        <view data-publish-time="{{item.time}}" bindtap="onItemClick">
-            <image class="image" mode="aspectFill" src="{{item.src}}"/>
-            <text class="time">{{item.time}}</text>
-            <view class="title">{{item.title}}</view>
+    <view class="hot-info" wx:for="{{content.hot}}">
+        <image class="media" mode="aspectFill" src="{{item.image}}"></image>
+        <view style="margin-top: 10rpx">{{item.brief}}</view>
+        <view class="footer">
+            <view class="left">
+                <image mode="aspectFit" src="{{item.avatar}}"></image>
+                <text style="margin-left:10rpx;">{{item.author}}</text>
+            </view>
+            <view class="right">
+                <image mode="aspectFit" src="../../images/icons/comment.png"></image>
+                <view>{{item.comments}}</view>
+            </view>
+            <view class="right">
+                <image mode="aspectFit" src="../../images/icons/like.png"></image>
+                <view>{{item.stars}}</view>
+            </view>
         </view>
     </view>
 
- 
+    <!--
+    <view id="footer">
+  <view class="container">
+    <view class="item" style="font-size:50rpx;">
+      <view style="display:inline-block">THE</view>
+      <view style="display:inline-block;margin-left:10rpx;color:#2EA1CA;">END</view>
+    </view>
+    <view class="item" style="font-size:24rpx;color:gray">DESIGNED BY 小闹钟</view>
+  </view>
+</view>
+-->
+
 
     <icon type="success" size="50" class="post" bindtap="onPostClick"/>
 </view>
