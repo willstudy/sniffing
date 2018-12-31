@@ -5,7 +5,7 @@
     <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
         <swiper-item wx:for="{{banner}}">
             <navigator url="{{item.target}}">
-                <image src="../../images/index/1.jpg" background-size="cover"></image>
+                <image src="{{item.img}}" background-size="cover"></image>
             </navigator>
         </swiper-item>
     </swiper>
@@ -36,18 +36,6 @@
         </view>
     </view>
 
-    <!--
-    <view id="footer">
-  <view class="container">
-    <view class="item" style="font-size:50rpx;">
-      <view style="display:inline-block">THE</view>
-      <view style="display:inline-block;margin-left:10rpx;color:#2EA1CA;">END</view>
-    </view>
-    <view class="item" style="font-size:24rpx;color:gray">DESIGNED BY 小闹钟</view>
-  </view>
-</view>
--->
-
-
+    <text>\n</text>
     <icon type="success" size="50" class="post" bindtap="onPostClick"/>
 </view>

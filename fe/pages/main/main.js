@@ -59,18 +59,18 @@ function getIndexData(that) {
                 channel: [
                     {
                         "target": "/pages/main/main",
-                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
+                        "icon_url": "../../images/icons/link.png",
+                        "name": "ios",
+                    },
+                    {
+                        "target": "/pages/main/main",
+                        "icon_url": "../../images/icons/link.png",
                         "name": "andriod",
                     },
                     {
                         "target": "/pages/main/main",
-                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
-                        "name": "andriod",
-                    },
-                    {
-                        "target": "/pages/main/main",
-                        "icon_url": "https://api.lecury.cn/static/img/index/icon_1.png",
-                        "name": "andriod",
+                        "icon_url": "../../images/icons/link.png",
+                        "name": "linux",
                     },
                 ],
                 content: res.data.data.content,
